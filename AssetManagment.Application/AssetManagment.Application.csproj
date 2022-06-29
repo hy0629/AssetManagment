@@ -1,0 +1,18 @@
+﻿<Project Sdk="Microsoft.NET.Sdk">
+
+	<PropertyGroup>
+		<TargetFramework>net6.0</TargetFramework>
+		<NoWarn>1701;1702;1591</NoWarn>
+		<DocumentationFile>AssetManagment.Application.xml</DocumentationFile>
+		<ImplicitUsings>enable</ImplicitUsings>
+	</PropertyGroup>
+
+	<ItemGroup>
+		<None Remove="AssetManagment.Application.xml" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<ProjectReference Include="..\AssetManagment.Core\AssetManagment.Core.csproj" />
+	</ItemGroup>
+
+</Project>
