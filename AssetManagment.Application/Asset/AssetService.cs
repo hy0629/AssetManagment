@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace AssetManagment.Application.Asset
 {
-    internal class AssetService
+    public class AssetService
     {
     }
 }

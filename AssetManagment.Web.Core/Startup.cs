@@ -12,6 +12,8 @@ public class Startup : AppStartup
     {
         services.AddControllersWithViews()
                     .AddInjectBase();
+        App.Configuration.GetSection("ConnectionConfigs");
+        SqlsugarSetup.AddSqlsugarSetup(services, App.Configuration);
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
