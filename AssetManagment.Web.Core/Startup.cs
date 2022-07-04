@@ -12,7 +12,8 @@ public class Startup : AppStartup
     {
         services.AddControllersWithViews()
                     .AddInjectBase();
-        App.Configuration.GetSection("ConnectionConfigs");
+        services.AddSpecificationDocuments();
+        services.AddDynamicApiControllers();
         SqlsugarSetup.AddSqlsugarSetup(services, App.Configuration);
     }
 
@@ -37,11 +38,14 @@ public class Startup : AppStartup
 
         app.UseInjectBase();
 
+        app.UseSpecificationDocuments();
+
+
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller=Home}/{action=Index}/{id?}");
+                pattern: "{controller}/{action}/{id?}");
         });
     }
 }

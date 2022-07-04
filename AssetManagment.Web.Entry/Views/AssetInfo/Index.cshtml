@@ -1,0 +1,367 @@
+﻿@using AssetManagment.Application.Asset
+@using AssetManagment.Core.Entities
+
+@inject IAssetService assetService;
+@*
+For more information on enabling MVC for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
+*@
+@{
+    List<AssetInfo> list = ViewBag.AssetList;
+    var cate = assetService.GetAssetCateGories();
+    var status = assetService.GetAssetStatus();
+    var region = assetService.GetRegions();
+    var storages = assetService.GetAssetStorages();
+    var departmentes = assetService.GetDepartmentes();
+    var members = assetService.GetMembers();
+    var pageIndex = 1;
+
+}
+
+<style>
+    body {
+        background: #efefef;
+    }
+   
+</style>
+<div class="container">
+    <div class="control-panel card mb-3">
+        <div class="card p-3">
+
+            <!--row1 start-->
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <div class="input-group  flex-nowrap">
+                        <label for="input1" class="col-form-label mx-3">编号</label>
+                        <input type="text" id="input1" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <div class="input-group flex-nowrap">
+                        <label for="input4" class="col-form-label mx-3">类别</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < cate.Count; i++)
+                            {
+                                <option value="@cate[i].Id">@cate[i].Code @cate[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="col-auto">
+                    <div class="input-group flex-nowrap">
+                         <label for="input2" class="col-form-label mx-3">名称</label>
+                        <input type="text" id="input2" class="form-control"/>
+                    </div>
+                   
+                </div>
+                <div class="col-auto">
+                    <div class="input-group flex-nowrap">
+                        <label for="input3" class="col-form-label mx-3">规格</label>
+                        <input type="text" id="input3" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+            <!--row1 end-->
+
+            <!--row2 start-->
+            <div class="row mb-3">
+                <div class="col-auto">
+                    <div class="input-group  flex-nowrap">
+                        <label for="input1" class="col-form-label mx-3">资产状况</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < status.Count; i++)
+                            {
+                                <option value="@status[i].Id">@status[i].Code @status[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div class="input-group  flex-nowrap">
+                        <label for="input1" class="col-form-label mx-3">地区</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < region.Count; i++)
+                            {
+                                <option value="@region[i].Id">@region[i].Code @region[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div class="input-group  flex-nowrap">
+                        <label for="input1" class="col-form-label mx-3">存放位置</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < storages.Count; i++)
+                            {
+                                <option value="@storages[i].Id">@storages[i].Code @storages[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-auto">
+                    <div class="input-group  flex-nowrap">
+                        <label for="input1" class="col-form-label mx-3">使用部门</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < departmentes.Count; i++)
+                            {
+                                <option value="@departmentes[i].Id">@departmentes[i].Code @departmentes[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <!--row2 end-->
+
+            <!--row3 start-->
+            <div class="row mb-3">
+                <div class=" col-auto">
+                    <div class="input-group flex-nowrap">
+                        <label for="" class="col-form-label mx-3">使用时间</label>
+                        <input class="form-control" type="date"/>
+                        <span class="col-form-label mx-2"> - </span>
+                        <input class="form-control" type="date"/>
+                    </div>
+                </div>
+            </div>
+            <!--row3 end-->
+
+            <!--button group start-->
+            <div class="row flex-nowrap">
+                <div class="col">
+                    <button class="btn btn-primary btn-add" data-bs-toggle="modal" data-bs-target="#addAssetModel">新增</button>
+                    <button class="btn btn-primary">查询</button>
+                    <button class="btn btn-light">重置</button>
+                </div>
+            </div>
+            <!--button group end-->
+        </div>
+    </div>
+    <div class="table-asset-info-con">
+        <div class="card p-3">
+            <table class="table">
+           <thead>
+               <tr>
+                   <th>编号</th>
+                   <th>类别</th>
+                   <th>名称</th>
+                   <th>规格</th>
+                   <th>计量单位</th>
+                   <th>价值</th>
+                   <th>当前状况</th>
+                   <th>来源</th>
+                   <th>所属地区</th>
+                   <th>存放位置</th>
+                   <th>使用部门</th>
+                   <th>使用人员</th>
+                   <th>领取时间</th>
+                   <th>备注</th>
+               </tr>
+           </thead>
+           <tbody>
+               <tr>
+                @for(var i = 0; i < list.Count; i++)
+                {
+                   <td>@list[i].AssetNumber</td>
+                   <td>@list[i].Category.Title</td>
+                   <td>@list[i].AssetName</td>
+                   <td>@list[i].AssetSpec</td>
+                   <td>@list[i].AssetUnit</td>
+                   <td>@list[i].Price</td>
+                   <td>@list[i].AssetStatus.Title</td>
+                   <td>@list[i].Sources.Origin</td>
+                   <td>@list[i].Region.Title</td>
+                   <td>@list[i].AssetStorage.Title</td>
+                   <td>@list[i].Department.Title</td>
+                   <td>@list[i].AssetUsers.Name</td>
+                   <td>@list[i].PickupTime.ToShortDateString()</td>
+                   <td>@list[i].Note</td>                     
+                }
+                </tr>
+           </tbody>
+       </table>
+        @if(list.Count > 0)
+        {
+                List<string> pageList = new List<string>();
+                double count = Math.Ceiling(list.Count / 20.0);
+                <script>
+                    console.log(@count);
+                </script>
+                if(count < 6)
+                {
+                    for(var i = 1; i <= count; i++)
+                    {
+                        pageList.Add(i.ToString());
+                    }
+                }
+
+                <nav aria-label="Page navigation example">
+                <ul class="pagination">
+                    @if(pageIndex != 1){
+                        <li class="page-item"><a class="page-link" href="#">上一页</a></li>
+                    }
+                    @for(var i = 0; i < pageList.Count; i++)
+                    {
+                        <li class="page-item"><a class="page-link" href="#">@pageList[i]</a></li>
+                            
+                    }
+                    @if(pageIndex != count)
+                    {
+                        <li class="page-item"><a class="page-link" href="#">下一页</a></li>
+                    }  
+               </ul>
+           </nav>
+        }
+        </div>
+       
+        
+    </div>
+</div>
+
+<!--新增弹窗 start-->
+<div class="modal fade" tabindex="-1" id="addAssetModel">
+  <div class="modal-dialog modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">资产资料</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-md-6 mb-2">
+                    <div class="input-group  flex-nowrap">
+                        <label class="col-form-label mx-3">编号</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+                <div class="col-md-4 mb-2">
+                    <div class="input-group flex-nowrap">
+                        <label class="col-form-label mx-3">类别</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < cate.Count; i++)
+                            {
+                                <option value="@cate[i].Id">@cate[i].Code @cate[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                    
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group flex-nowrap">
+                         <labe class="col-form-label mx-3">名称</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                   
+                </div>
+                <div class="col-md-6 mb-2">
+                    <div class="input-group flex-nowrap">
+                        <label class="col-form-label mx-3">规格</label>
+                        <input type="text" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group  flex-nowrap">
+                        <label class="col-form-label mx-3">资产状况</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < status.Count; i++)
+                            {
+                                <option value="@status[i].Id">@status[i].Code @status[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group  flex-nowrap">
+                        <label class="col-form-label mx-3">地区</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < region.Count; i++)
+                            {
+                                <option value="@region[i].Id">@region[i].Code @region[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group  flex-nowrap">
+                        <label class="col-form-label mx-3">存放位置</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < storages.Count; i++)
+                            {
+                                <option value="@storages[i].Id">@storages[i].Code @storages[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group  flex-nowrap">
+                        <label class="col-form-label mx-3">使用部门</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value="0">------------</option>
+                            @for(var i = 0; i < departmentes.Count; i++)
+                            {
+                                <option value="@departmentes[i].Id">@departmentes[i].Code @departmentes[i].Title</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group flex-nowrap">
+                        <label class="col-form-label mx-3">使用人</label>
+                        <select class="form-select" style="min-width:120px;">
+                            <option value ="0">------------</option>
+                            @for(var i = 0; i < members.Count; i++)
+                                    {
+                                        <option value="@members[i].Id">@members[i].Name</option>
+                                    }
+                                </select>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group flex-nowrap">
+                        <label class="col-form-label mx-3">增添时间</label>
+                        <input type="date" class="form-control"/>
+                    </div>
+                </div>
+
+                <div class="col-md-4 mb-2">
+                    <div class="input-group flex-nowrap">
+                        <label class="col-form-label mx-3">领用时间</label>
+                        <input type="date" class="form-control"/>
+                    </div>
+                </div>
+            </div>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        <button type="button" class="btn btn-primary">Save changes</button>
+      </div>
+    </div>
+  </div>
+</div>
+<!--新增弹窗 end-->
+<script>
+var btnAdd = document.querySelector(".btn-add");
+var nModal = document.querySelector("#addAssetModel");
+nModal.addEventListener('show.bs.modal', function() {
+    alert('1');
+});
+</script>

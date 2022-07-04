@@ -7,7 +7,31 @@
 	</PropertyGroup>
 
 	<ItemGroup>
+	  <Content Remove="Views\AssetInfo\category.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Remove="Views\Shared\_Layout.cshtml.bak" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Include="Views\Shared\_Layout.cshtml.bak" />
+	</ItemGroup>
+
+	<ItemGroup>
 		<ProjectReference Include="..\AssetManagment.Web.Core\AssetManagment.Web.Core.csproj" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <UpToDateCheckInput Remove="Views\AssetInfo\category.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <_ContentIncludedByDefault Remove="Views\AssetInfo\category.cshtml" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <None Include="Views\AssetInfo\category.cshtml" />
 	</ItemGroup>
 
 </Project>

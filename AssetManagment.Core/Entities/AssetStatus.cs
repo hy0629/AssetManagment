@@ -9,12 +9,12 @@ namespace AssetManagment.Core.Entities
 {
     #region 资产状况
     [SugarTable("sys_asset_status")]
-    public class AssetStatus
+    public class AssetStatus:Entity
     {
-        [SugarColumn(ColumnName ="status_title", IsNullable = false)]
+        [SugarColumn(ColumnName ="status_title")]
         public string Title { get; set; }
 
-        [SugarColumn(ColumnName ="status_code", IsNullable = false)]
+        [SugarColumn(ColumnName ="status_code")]
         public string Code { get; set; }
     }
     #endregion

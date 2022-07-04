@@ -13,11 +13,11 @@ namespace AssetManagment.Core.Entities
     public class AssetCategory:Entity
     {
 
-        [SugarColumn(ColumnName ="category_title", IsNullable = false)]
+        [SugarColumn(ColumnName ="category_title")]
         public string Title { get; set; }
 
 
-        [SugarColumn(ColumnName ="category_code", IsNullable = false)]
+        [SugarColumn(ColumnName ="category_code")]
         public string Code { get; set; }
 
     }

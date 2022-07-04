@@ -6,11 +6,11 @@ namespace AssetManagment.Core.Entities
     [SugarTable("sys_asset_sources")]
     public class AssetSources:Entity
     {
-        [SugarColumn(ColumnName = "origin", IsNullable =false)]
+        [SugarColumn(ColumnName = "origin")]
         public string Origin { get; set; }
 
 
-        [SugarColumn(ColumnName ="origin_code", IsNullable = false)]
+        [SugarColumn(ColumnName ="origin_code")]
         public string Code { get; set; }
 
     }
