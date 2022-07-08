@@ -14,7 +14,7 @@ namespace AssetManagment.Web.Entry.Controllers
 
         public IActionResult Index([FromQuery] int page = 1)
         {
-            ViewBag.AssetList = _assetService.GetAssetInfos(page);
+            ViewBag.Description = "数据维护";
             return View();
         }
 

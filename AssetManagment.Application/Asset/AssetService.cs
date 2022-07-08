@@ -20,6 +20,11 @@ namespace AssetManagment.Application.Asset
             _db.Insertable<AssetCategory>(category).ExecuteReturnIdentity();
         }
 
+        public int AddAssetInfo(AssetInfo info)
+        {
+            return _db.Insertable<AssetInfo>(info).ExecuteReturnIdentity();
+        }
+
         public void AddAssetSources(AssetSources source)
         {
             _db.Insertable<AssetSources>(source).ExecuteReturnIdentity();

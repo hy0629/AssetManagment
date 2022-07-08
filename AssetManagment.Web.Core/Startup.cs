@@ -3,6 +3,9 @@ using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
+using System.Text.Encodings.Web;
+using System.Text.Json;
+using System.Text.Json.Serialization;
 
 namespace AssetManagment.Web.Core;
 
@@ -10,8 +13,12 @@ public class Startup : AppStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddControllersWithViews()
-                    .AddInjectBase();
+        services.AddControllersWithViews().AddJsonOptions(options =>
+        {
+            options.JsonSerializerOptions.Converters.AddDateFormatString("yyyy-MM-dd");
+            options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles;
+            options.JsonSerializerOptions.Encoder = JavaScriptEncoder.UnsafeRelaxedJsonEscaping;
+        }).AddInjectBase();
         services.AddSpecificationDocuments();
         services.AddDynamicApiControllers();
         SqlsugarSetup.AddSqlsugarSetup(services, App.Configuration);
@@ -45,7 +52,9 @@ public class Startup : AppStartup
         {
             endpoints.MapControllerRoute(
                 name: "default",
-                pattern: "{controller}/{action}/{id?}");
+                pattern: "{controller=Home}/{action=Index}/{id?}");
+
+            
         });
     }
 }

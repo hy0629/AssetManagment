@@ -16,7 +16,7 @@ public class HomeController : Controller
 
     public IActionResult Index()
     {
-        ViewBag.Description = _systemService.GetDescription();
+        ViewBag.Description = "主页";
 
         return View();
     }

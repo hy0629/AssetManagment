@@ -7,7 +7,7 @@ namespace AssetManagment.Core.Entities
     public class AssetInfo:Entity
     {
         [SugarColumn(ColumnName ="create_time")]
-        public string CreateTime { get; set; }
+        public DateTime CreateTime { get; set; }
 
         [SugarColumn(IsIgnore =true)]
         [Navigate(NavigateType.OneToOne, nameof(UserId))]
@@ -49,11 +49,11 @@ namespace AssetManagment.Core.Entities
         public string Price { get; set; }
 
         [SugarColumn(IsIgnore = true)]
-        [Navigate(NavigateType.OneToOne, nameof(AssetStstusId))]
+        [Navigate(NavigateType.OneToOne, nameof(AssetStatusId))]
         public AssetStatus AssetStatus { get; set; }
 
         [SugarColumn(ColumnName = "asset_status_id")]
-        public int AssetStstusId { get; set; }
+        public int AssetStatusId { get; set; }
 
         [SugarColumn(IsIgnore = true)]
         [Navigate(NavigateType.OneToOne, nameof(AssetStorageId))]
@@ -85,6 +85,9 @@ namespace AssetManagment.Core.Entities
         [SugarColumn(IsIgnore = true)]
         [Navigate(NavigateType.OneToOne, nameof(RegionId))]
         public Region Region { get; set; }
+
+        [SugarColumn(ColumnName = "service_life", IsNullable =true)]
+        public string ServiceLife { get; set; }
 
     }
 }

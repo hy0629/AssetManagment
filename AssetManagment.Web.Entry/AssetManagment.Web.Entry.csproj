@@ -34,4 +34,9 @@
 	  <None Include="Views\AssetInfo\category.cshtml" />
 	</ItemGroup>
 
+	<ItemGroup>
+	  <Folder Include="wwwroot\assetinfo\新文件夹\" />
+	  <Folder Include="wwwroot\js\" />
+	</ItemGroup>
+
 </Project>

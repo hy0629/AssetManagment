@@ -12,6 +12,8 @@ namespace AssetManagment.Application.Asset
         List<AssetInfo> GetAssetInfos();
         List<AssetInfo> GetAssetInfos(int page);
 
+        int AddAssetInfo(AssetInfo info);
+
 
         #region 资产种类
         void AddAssetCateGory(AssetCategory category);
