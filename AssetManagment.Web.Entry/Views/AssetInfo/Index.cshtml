@@ -21,41 +21,9 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 
 <div class="row flex-xl-nowrap">
     <aside class="card bd-sidebar col-md-3 col-xl-2  py-md-3 pl-md-5">
-        <ul class="nav flex-column">
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/index" data-path="index">资产数据</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/category" data-path="category">资产类别</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/source" data-path="source">资产来源</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/state" data-path="state">资产状况</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/origin" data-path="origin">所属地区</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/storage" data-path="storage">存放位置</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/department" data-path="department">部门管理</a>
-            </li>
-            <li class="nav-item">
-            <a class="nav-link" href="/assetinfo/member" data-path="member">人员管理</a>
-            </li>
-            <!--
-            <li class="nav-item">
-            <a class="nav-link disabled">Disabled</a>
-            </li>
-            -->
-        </ul>
-        
+        <partial name="_AssetNavList.cshtml"></partial>
     </aside>
     <main class="bd-main col-md-9 col-xl-10 py-md-3 pl-md-5">
-    <div class="container">
     <div class="control-panel card mb-3">
         <div class="card p-3">
 
@@ -176,7 +144,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
             <!--button group end-->
         </div>
     </div>
-    <div class="table-asset-info-con">
+    <div class="table-asset-info-con autoflow-auto">
         <div class="card p-3">
             <table class="table table-striped">
            <thead id = "tablehead">
@@ -191,7 +159,6 @@ For more information on enabling MVC for empty projects, visit https://go.micros
        
         
     </div>
-</div>
 </main>
 </div>
 
@@ -259,7 +226,7 @@ For more information on enabling MVC for empty projects, visit https://go.micros
                             <option value="0">------------</option>
                             @for(var i = 0; i < sources.Count; i++)
                             {
-                                <option value="@sources[i].Id">@sources[i].Code @sources[i].Origin</option>
+                                <option value="@sources[i].Id">@sources[i].Code @sources[i].Title</option>
                             }
                         </select>
                     </div>
@@ -356,5 +323,5 @@ For more information on enabling MVC for empty projects, visit https://go.micros
 <div></div>
 <!--新增弹窗 end-->
 
-<script src="/assetinfo/js/init.js"></script>
+<script src="/assetinfo/js/index.js"></script>
 <script src="/assetinfo/js/modal.js"></script>

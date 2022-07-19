@@ -1,20 +1,3 @@
-var tablebody = document.querySelector("#tablebody");
-axios.get("/api/asset-api/asset-infos").then(response => {
-    var d = response.data.data;
-    var html = "";
-    for (var i = 0; i < d.length; i++) {
-        html += TablebodyHtml(headerDefined, d[i]);
-    }
-
-    tablebody.innerHTML = html;
-
-
-}).catch(err => {
-
-});
-
-
-
 var headerDefined = {
     "asset_number": "资产编号",
     "asset_category": "资产类别",
@@ -34,25 +17,57 @@ var headerDefined = {
     "service_life": "使用年限"
 }
 
-window.headerDefined = headerDefined;
-
-function TableHeadHtml(list) {
-    if (list == undefined) return;
-    var keys = Object.keys(list);
-    var headlist = keys.map(key => `<th>${list[key]}</th>`);
-    return `<tr>${headlist.join('')}</tr>`;
+function safeValue(value) {
+    if (value == null || value == undefined) {
+        return "";
+    }
+    return value;
 }
 
-var head = document.querySelector("#tablehead");
-head.innerHTML = TableHeadHtml(headerDefined);
-
-
-function TablebodyHtml(list, data) {
-    if (list == undefined) return "";
-
-    var keys = Object.keys(list);
-
-    var items = keys.map(key => `<td>${data[key] == null ? '' : data[key]}</td>`)
-    return `<tr>${items.join('')}</tr>`;
+//表头
+function generateTableHead(dict, callback) {
+    var keys = Object.keys(dict);
+    var tdl = keys.map(val => {
+        return `<th>${safeValue(dict[val])}</th>`;
+    });
+    var html = `<tr>${tdl.join('')}</tr>`;
+    var doc = document.createRange().createContextualFragment(html);
+    if (typeof callback == 'function') {
+        callback(doc);
+    }
+    return doc;
 }
 
+//表体
+function generateTableBody(dict, data, callback) {
+    var keys = Object.keys(dict);
+    var tdl = keys.map(val => {
+        return `<td>${safeValue(data[val])}</td>`
+    });
+    var html = `<tr>${tdl.join('')}</tr>`
+    var doc = document.createRange().createContextualFragment(html);
+    if (typeof callback == 'function') {
+        callback(doc);
+    }
+    return doc;
+}
+
+//路径高亮
+var pathname = window.location.pathname;
+var pathlist = pathname.split('/');
+var navlist = document.querySelectorAll('.nav-link');
+
+pathlist = pathlist.splice(1);
+
+pathlist.forEach(path => {
+    var link = document.querySelector(`.nav-link[data-path="${path}"]`);
+    if (link != undefined) {
+        link.classList.add("active");
+    }
+});
+//
+
+//注册公共方法
+window.header_defined = headerDefined;
+window.generateTableBody = generateTableBody;
+window.generateTableHead = generateTableHead;

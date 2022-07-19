@@ -42,7 +42,7 @@ namespace AssetManagment.Web.Entry.Api
             {
                 data.Add(new AssetInfoResult { 
                     AssetNumber = info.AssetNumber,
-                    AssetSource = info.Sources.Origin,
+                    AssetSource = info.Sources.Title,
                     AssetState = info.AssetStatus.Title,
                     Region = info.Region.Title,
                     Storage = info.AssetStorage.Title,
@@ -62,6 +62,18 @@ namespace AssetManagment.Web.Entry.Api
                 });
             });
             return new ApiResult<List<AssetInfoResult>> { Code = 200, Message = "success", Data = data };
+        }
+
+        public ApiResult<List<ResultBase>> GetCategory([FromQuery]string code = "", [FromQuery]string title = "")
+        {
+            List<AssetCategory> list = service.GetAssetCateGories();
+            List<ResultBase> result = new List<ResultBase>();
+            list.ForEach((AssetCategory category) =>
+            {
+                result.Add(new ResultBase { Id = category.Id, Code = category.Code, Title = category.Title, Note = category.Note});
+            });
+
+            return new ApiResult<List<ResultBase>> { Code = 200, Message = "success", Data = result};
         }
     }
 }

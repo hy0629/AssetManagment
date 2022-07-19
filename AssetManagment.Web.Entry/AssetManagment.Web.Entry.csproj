@@ -7,10 +7,6 @@
 	</PropertyGroup>
 
 	<ItemGroup>
-	  <Content Remove="Views\AssetInfo\category.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <None Remove="Views\Shared\_Layout.cshtml.bak" />
 	</ItemGroup>
 
@@ -23,20 +19,27 @@
 	</ItemGroup>
 
 	<ItemGroup>
-	  <UpToDateCheckInput Remove="Views\AssetInfo\category.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <_ContentIncludedByDefault Remove="Views\AssetInfo\category.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
-	  <None Include="Views\AssetInfo\category.cshtml" />
-	</ItemGroup>
-
-	<ItemGroup>
 	  <Folder Include="wwwroot\assetinfo\新文件夹\" />
-	  <Folder Include="wwwroot\js\" />
+	  <Folder Include="wwwroot\src\js\" />
+	  <Folder Include="wwwroot\src\" />
+	</ItemGroup>
+
+	<ItemGroup>
+	  <Content Update="wwwroot\assetinfo\js\category.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\assetinfo\js\index.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\assetinfo\js\init.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\assetinfo\js\modal.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
+	  <Content Update="wwwroot\src\js\index.js">
+	    <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+	  </Content>
 	</ItemGroup>
 
 </Project>

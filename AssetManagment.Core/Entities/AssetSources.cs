@@ -7,7 +7,7 @@ namespace AssetManagment.Core.Entities
     public class AssetSources:Entity
     {
         [SugarColumn(ColumnName = "origin")]
-        public string Origin { get; set; }
+        public string Title { get; set; }
 
 
         [SugarColumn(ColumnName ="origin_code")]

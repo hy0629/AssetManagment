@@ -25,6 +25,37 @@ namespace AssetManagment.Web.Entry.Controllers
 
         public IActionResult Category()
         {
+            ViewBag.Description = "资产类别";
+            return View();
+        }
+
+        public IActionResult Department()
+        {
+            ViewBag.Description = "部门管理";
+            return View();
+        }
+
+        public IActionResult Region()
+        {
+            ViewBag.Description = "地区管理";
+            return View();
+        }
+
+        public IActionResult Storage()
+        {
+            ViewBag.Description = "存储地方管理";
+            return View();
+        }
+
+        public IActionResult AssetStatus()
+        {
+            ViewBag.Description = "资产状态";
+            return View();
+        }
+
+        public IActionResult AssetSource()
+        {
+            ViewBag.Description = "资产来源";
             return View();
         }
     }
